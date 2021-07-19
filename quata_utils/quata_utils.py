@@ -1,6 +1,5 @@
 """Main module."""
 import requests
-
 import warnings
 import xmltodict
 import base64
@@ -11,7 +10,6 @@ from datetime import datetime
 import logging
 from time import sleep
 import random
-from fake_useragent import UserAgent
 
 
 def chunks(l, n):
