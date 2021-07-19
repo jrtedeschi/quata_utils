@@ -34,7 +34,7 @@ def get_fundos_fnet():
             # sleep(random.randint(2,2))
             r = requests.get(URL.format(i),\
                 verify=False,\
-                headers={'User-Agent': ua.random})
+                headers={'User-Agent': ua})
             if r.status_code == 200:
                 data_list.append(r.json()['results'])
                 condition = r.json()['more']
@@ -53,7 +53,7 @@ def get_informes_id(cnpj):
     try:
         r = requests.get(URL.format(admin=cnpj,day1="01",month1="01",year1="2016",day="31",month="12",year="2021"),\
             verify=False,\
-            headers={'User-Agent': ua.random})
+            headers={'User-Agent': ua})
 
         if r.status_code == 200:
             data = r.json()['data']
