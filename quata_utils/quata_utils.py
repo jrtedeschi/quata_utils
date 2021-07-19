@@ -1,6 +1,5 @@
 """Main module."""
 import requests
-import pandas as pd 
 import tqdm
 import warnings
 import xmltodict
