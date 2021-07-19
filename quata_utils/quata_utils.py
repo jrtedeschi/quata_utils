@@ -1,6 +1,5 @@
 """Main module."""
 import requests
-import tqdm
 import warnings
 import xmltodict
 import base64
