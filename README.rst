@@ -1,0 +1,37 @@
+===========
+quata_utils
+===========
+
+
+.. image:: https://img.shields.io/pypi/v/quata_utils.svg
+        :target: https://pypi.python.org/pypi/quata_utils
+
+.. image:: https://img.shields.io/travis/jrtedeschi/quata_utils.svg
+        :target: https://travis-ci.com/jrtedeschi/quata_utils
+
+.. image:: https://readthedocs.org/projects/quata-utils/badge/?version=latest
+        :target: https://quata-utils.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
+
+
+
+
+develop Quata Data Projects
+
+
+* Free software: MIT license
+* Documentation: https://quata-utils.readthedocs.io.
+
+
+Features
+--------
+
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
