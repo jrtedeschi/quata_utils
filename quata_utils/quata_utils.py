@@ -71,7 +71,7 @@ def get_rendimentos_id(cnpj):
     URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&cnpjFundo={cnpj}&idCategoriaDocumento=14&idTipoDocumento=41&idEspecieDocumento=0&situacao=A&_=1626801789397"
     warnings.filterwarnings("ignore")
     try:
-        r = requests.get(URL.format(admin=cnpj),\
+        r = requests.get(URL.format(cnpj=cnpj),\
             verify=False,\
             headers={'User-Agent': ua})
 
