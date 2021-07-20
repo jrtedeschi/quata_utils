@@ -45,11 +45,12 @@ def get_fundos_fnet():
     return fundos
 
 def get_informes_id(cnpj):
+    date = datetime.today()
     ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
     URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=3&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&idCategoriaDocumento=6&idTipoDocumento=40&idEspecieDocumento=0&cnpjFundo={admin}&dataInicial={day1}%2F{month1}%2F{year1}&dataFinal={day}%2F{month}%2F{year}&_=1626271510426"
     warnings.filterwarnings("ignore")
     try:
-        r = requests.get(URL.format(admin=cnpj,day1="01",month1="01",year1="2016",day="31",month="12",year="2021"),\
+        r = requests.get(URL.format(admin=cnpj,day1="01",month1="01",year1="2016",day=str(date.day()),month=str(date.month()),year=str(date.year())),\
             verify=False,\
             headers={'User-Agent': ua})
 
