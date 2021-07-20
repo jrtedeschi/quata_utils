@@ -64,11 +64,11 @@ def get_informes_id(cnpj):
         raise
         pass
 
-    
+
 def get_rendimentos_id(cnpj):
     date = datetime.today()
     ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
-    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&cnpjFundo={cpnj}&idCategoriaDocumento=14&idTipoDocumento=41&idEspecieDocumento=0&situacao=A&_=1626801789397"
+    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&cnpjFundo={cnpj}&idCategoriaDocumento=14&idTipoDocumento=41&idEspecieDocumento=0&situacao=A&_=1626801789397"
     warnings.filterwarnings("ignore")
     try:
         r = requests.get(URL.format(admin=cnpj),\
