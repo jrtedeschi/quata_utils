@@ -2,6 +2,7 @@
 import requests
 import warnings
 import xmltodict
+import pandas as pd
 import base64
 import xml.etree.ElementTree as ET
 from collections import defaultdict
@@ -64,3 +65,55 @@ def get_informes_id(cnpj):
         pass
 
     
+def get_rendimentos_id(cnpj):
+    date = datetime.today()
+    ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
+    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&cnpjFundo={cpnj}&idCategoriaDocumento=14&idTipoDocumento=41&idEspecieDocumento=0&situacao=A&_=1626801789397"
+    warnings.filterwarnings("ignore")
+    try:
+        r = requests.get(URL.format(admin=cnpj),\
+            verify=False,\
+            headers={'User-Agent': ua})
+
+        if r.status_code == 200:
+            data = r.json()['data']
+            return data
+        else:
+            return "Erro: Status Code: {} - {} ".format(r.status_code , r.text)
+    except:
+        raise
+        pass
+    
+def get_rendimentos(ids):
+    """Pega os dividendos de um dado cnpj, tendo como fonte de dados o site do fundosnet"""
+    
+    warnings.filterwarnings("ignore")
+    dd = defaultdict(list)
+
+    lista_campos = ["id","CodNegociacaoCota","NomeFundo","CNPJFundo","ValorProventoCota","DataPagamento","DataAprovacao","DataBase","PeriodoReferencia",\
+    "Ano","CodISINCota","ResponsavelInformacao","NomeAdministrador","CNPJAdministrador"]
+
+    lista_dados = []
+    url = "https://fnet.bmfbovespa.com.br/fnet/publico/downloadDocumento?id={}"
+
+    for id in ids: 
+    #make request
+        try:
+            r = requests.get(url.format(id),verify=False)
+            decoded_text = base64.b64decode(r.text)
+            root = ET.fromstring(decoded_text)
+            rendimento = {child.tag:child.text for child in root.find("InformeRendimentos").find("Rendimento")}
+            dadosgerais = {child.tag:child.text for child in root.find("DadosGerais")}
+            id_data = {"id":id}
+
+            predata = dict(**id_data, **rendimento, **dadosgerais)
+            data = {i: predata[i] for i in lista_campos}
+            lista_dados.append(data)
+        except:
+            pass
+
+    for d in lista_dados: # you can list as many input dicts as you want here
+        for key, value in d.items():
+            dd[key].append(value)
+
+    return pd.DataFrame.from_dict(dd)
