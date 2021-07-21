@@ -148,7 +148,7 @@ def xml_downloader(lista_ids, filename = "filename"):
     for id in tqdm.tqdm(lista_ids): 
         logging.info("tentativa de request para o id {}".format(id))
         try:
-            r = requests.get(url.format(id),verify=False, headers = {'User-Agent': ua.random})
+            r = requests.get(url.format(id),verify=False, headers = {'User-Agent': ua})
             decoded_text = base64.b64decode(r.text)
             data = pd.json_normalize(xmltodict.parse(decoded_text),max_level=3,sep="_")
             data['id'] = id
