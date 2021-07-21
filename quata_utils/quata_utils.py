@@ -111,8 +111,21 @@ def get_rendimentos(ids):
             data = {i: predata[i] for i in lista_campos}
             lista_dados.append(data)
         except:
-            print("id {} não foi baixado".format(id))
-            pass
+            print("id {} não foi baixado, tentando mais uma vez".format(id))
+            try:
+                r = requests.get(url.format(id),verify=False)
+                decoded_text = base64.b64decode(r.text)
+                root = ET.fromstring(decoded_text)
+                rendimento = {child.tag:child.text for child in root.find("InformeRendimentos").find("Rendimento")}
+                dadosgerais = {child.tag:child.text for child in root.find("DadosGerais")}
+                id_data = {"id":id}
+
+                predata = dict(**id_data, **rendimento, **dadosgerais)
+                data = {i: predata[i] for i in lista_campos}
+                lista_dados.append(data)
+            except:
+                print("id {} não foi baixado, triste".format(id))
+                pass
 
     for d in lista_dados: # you can list as many input dicts as you want here
         for key, value in d.items():
