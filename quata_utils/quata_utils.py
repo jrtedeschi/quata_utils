@@ -111,7 +111,7 @@ def get_rendimentos(ids):
             data = {i: predata[i] for i in lista_campos}
             lista_dados.append(data)
         except:
-            print("id {} não foi baixado")
+            print("id {} não foi baixado".format(id))
             pass
 
     for d in lista_dados: # you can list as many input dicts as you want here
