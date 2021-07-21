@@ -12,7 +12,9 @@ import logging
 from time import sleep
 import random
 import tqdm
+import os
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 def chunks(l, n):
     """ Divide uma lista em n sublistas """
@@ -132,3 +134,30 @@ def get_rendimentos(ids):
             dd[key].append(value)
 
     return pd.DataFrame.from_dict(dd)
+
+
+def xml_downloader(lista_ids, filename = "filename"):
+    ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
+    warnings.filterwarnings("ignore")
+    logging.basicConfig(filename=BASE_DIR+filename+".log",level=logging.INFO)
+    logging.info("processo iniciado")
+
+    url = "https://fnet.bmfbovespa.com.br/fnet/publico/downloadDocumento?id={}"
+    lista = []
+
+    for id in tqdm.tqdm(lista_ids): 
+        logging.info("tentativa de request para o id {}".format(id))
+        try:
+            r = requests.get(url.format(id),verify=False, headers = {'User-Agent': ua.random})
+            decoded_text = base64.b64decode(r.text)
+            data = pd.json_normalize(xmltodict.parse(decoded_text),max_level=3,sep="_")
+            data['id'] = id
+            lista.append(data)
+            logging.info("request id {} feito com sucesso".format(id))
+        except:
+            logging.info("request id {} deu erro".format(id))
+            pass
+    if len(lista) == 0:
+        print("erro no tamanho da lista")
+    df = pd.concat(lista)       
+    return df
