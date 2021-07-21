@@ -11,6 +11,7 @@ from datetime import datetime
 import logging
 from time import sleep
 import random
+import tqdm
 
 
 def chunks(l, n):
@@ -96,7 +97,7 @@ def get_rendimentos(ids):
     lista_dados = []
     url = "https://fnet.bmfbovespa.com.br/fnet/publico/downloadDocumento?id={}"
 
-    for id in ids: 
+    for id in tqdm.tqdm(ids): 
     #make request
         try:
             r = requests.get(url.format(id),verify=False)
@@ -110,6 +111,7 @@ def get_rendimentos(ids):
             data = {i: predata[i] for i in lista_campos}
             lista_dados.append(data)
         except:
+            print("id {} não foi baixado")
             pass
 
     for d in lista_dados: # you can list as many input dicts as you want here
