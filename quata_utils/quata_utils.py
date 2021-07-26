@@ -183,7 +183,7 @@ def get_informest_id(cnpj):
 
 def get_informest_id(cnpj):
     ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
-    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=10&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&idCategoriaDocumento=6&idTipoDocumento=45&cnpjFundo={admin}&idEspecieDocumento=0&situacao=A&_=1627331653320"
+    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosDados?d=2&s=0&l=200&o%5B0%5D%5BdataEntrega%5D=desc&tipoFundo=1&idCategoriaDocumento=6&idTipoDocumento=45&cnpjFundo={admin}&idEspecieDocumento=0&situacao=A&_=1627331653320"
     warnings.filterwarnings("ignore")
     try:
         r = requests.get(URL.format(admin=cnpj),\
