@@ -162,7 +162,7 @@ def xml_downloader(lista_ids, filename = "filename"):
         df = pd.concat(lista)       
         return df
     except:
-        return lista[0]
+        return data
 
 
 def get_informest_id(cnpj):
