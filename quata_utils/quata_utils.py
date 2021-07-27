@@ -158,11 +158,8 @@ def xml_downloader(lista_ids, filename = "filename"):
             pass
     if len(lista) == 0:
         print("erro no tamanho da lista")
-    try:    
-        df = pd.concat(lista)       
-        return df
-    except:
-        return data
+    df = pd.concat(lista)       
+    return df
 
 
 def get_informest_id(cnpj):
