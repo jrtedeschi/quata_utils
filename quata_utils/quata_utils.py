@@ -138,7 +138,7 @@ def get_rendimentos(ids):
 def xml_downloader(lista_ids, filename = "filename"):
     ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
     warnings.filterwarnings("ignore")
-    logging.basicConfig(filename=BASE_DIR+filename+".log",level=logging.INFO)
+    logging.basicConfig(filename = filename+".log",level=logging.INFO)
     logging.info("processo iniciado")
 
     url = "https://fnet.bmfbovespa.com.br/fnet/publico/downloadDocumento?id={}"
