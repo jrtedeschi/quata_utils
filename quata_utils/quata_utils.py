@@ -23,9 +23,14 @@ def chunks(l, n):
         si = (d+1)*(i if i < r else r) + d*(0 if i < r else i - r)
         yield l[si:si+(d+1 if i < r else d)]
 
-def get_fundos_fnet():
+def get_fundos_fnet(URL="https://fnet.bmfbovespa.com.br/fnet/publico/listarFundos?&term=&page={}&idTipoFundo=1&idAdm=0&paraCerts=false&_=1626443273261"):
+    """
+    *Função que retorna ids de Administradores de Fundos, Certificados e Títulos do FNET, essencial pra scraping fracionado do FNET
+    *Colocar uma URL de lista fundos, proveniente da inspeção do pop-up de filtros do FNET, seja pra Fundos ou pra CRIs, CRAs
+    * A função formata a string e faz um request com a URL parametrizada até obter um Status Code diferente de 200
+    """
+    
     ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
-    URL = "https://fnet.bmfbovespa.com.br/fnet/publico/listarFundos?&term=&page={}&idTipoFundo=1&idAdm=0&paraCerts=false&_=1626443273261"
     warnings.filterwarnings("ignore")
     data_list = []
     condition = True
