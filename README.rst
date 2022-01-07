@@ -26,7 +26,7 @@ develop Quata Data Projects
 Features
 --------
 
-* Collect Investment Funds public data from [FundosNet](https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosCVM?tipoFundo=1)
+* Collect Investment Funds public data from (https://fnet.bmfbovespa.com.br/fnet/publico/pesquisarGerenciadorDocumentosCVM?tipoFundo=1)[FundosNet]
 * Wrangle XML data and normalize it into CSV format
 * Save it to GCP Bucket
 
